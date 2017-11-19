@@ -1,0 +1,13 @@
+package com.yaoyou.dao;
+
+import com.yaoyou.model.dataObject.${class};
+import com.yaoyou.model.dataObject.${class}Example;
+import com.yaoyou.model.dto.${class}DTO;
+import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.type.JdbcType;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+public interface ${class}MapperExt extends ${class}Mapper {
+}

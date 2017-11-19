@@ -1,0 +1,82 @@
+package com.yaoyou.interfaces.controller;
+
+import com.yaoyou.model.dataObject.${class};
+import com.yaoyou.service.${class}Service;
+import com.yaoyou.util.ObjectNullCheck;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+
+/**
+* Created by song.
+*/
+@Controller
+@RequestMapping("/${object}")
+public class ${class}Controller extends BaseController {
+
+    @Resource
+    ${class}Service ${object}Service;
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public ${class} view(@PathVariable int id, HttpServletRequest request/*,Model model*/){
+        return ObjectNullCheck.getNonNullObject(${class}.class, ${object}Service.get(id));
+    }
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @ResponseBody
+    public List<${class}> viewList(){
+        return ${object}Service.getList(1);
+    }
+
+    @RequestMapping(value = "/list/{pageNum}", method = RequestMethod.GET)
+    @ResponseBody
+    public List<${class}> viewList(@PathVariable int pageNum, HttpServletRequest request/*,Model model*/){
+        return ${object}Service.getList(pageNum);
+    }
+
+    @RequestMapping(value = "/list/totalPage", method = RequestMethod.GET)
+    @ResponseBody
+    public int viewList(HttpServletRequest request/*,Model model*/){
+        return ${object}Service.totalPage();
+    }
+
+
+    @RequestMapping(value = "", method = RequestMethod.POST)
+    @ResponseBody
+    public Result add(@RequestBody ${class} ${object}, HttpServletRequest request/*,Model model*/){
+        Result result = ${object}Service.add(${object});
+        return result;
+    }
+
+    @RequestMapping(value = "", method = RequestMethod.PUT)
+    @ResponseBody
+    public Result update(@RequestBody ${class} ${object}, HttpServletRequest request/*,Model model*/){
+        int result = ${object}Service.update(${object});
+        return newResult(result, "", null);
+    }
+
+    @RequestMapping(value = "", method = RequestMethod.DELETE)
+    @ResponseBody
+    public Result delete(@RequestBody ${class} ${object}, HttpServletRequest request/*,Model model*/){
+        int result = ${object}Service.delete(${object});
+        return newResult(result, "", null);
+    }
+
+
+    @RequestMapping(value = "/page/add", method = RequestMethod.GET)
+    public String redirectAdd(){
+        return "${object}/add";
+    }
+    @RequestMapping(value = "/page/edit", method = RequestMethod.GET)
+    public String redirectEdit(){
+        return "${object}/edit";
+    }
+    @RequestMapping(value = "/page/delete", method = RequestMethod.GET)
+    public String redirectDelete(){
+        return "${object}/delete";
+    }
+}

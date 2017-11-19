@@ -1,0 +1,47 @@
+package com.yaoyou.service;
+
+import com.yaoyou.dao.${class}MapperExt;
+import com.yaoyou.interfaces.controller.Result;
+import com.yaoyou.model.dataObject.${class};
+import com.yaoyou.model.dataObject.${class}Example;
+import com.yaoyou.util.PageUtil;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import java.util.List;
+
+/**
+* Created by song.
+*/
+@Service
+public class ${class}Service extends BaseService{
+    @Resource
+    ${class}MapperExt ${object}MapperExt;
+
+    public Result add(${class} ${object}) {
+        return new Result(${object}MapperExt.insert(${object}),"",${object});
+    }
+
+    public int update(${class} ${object}) {
+        return ${object}MapperExt.updateByPrimaryKey(${object});
+    }
+
+    public int delete(${class} ${object}) {
+        return ${object}MapperExt.deleteByPrimaryKey(${object}.get${class}Id());
+    }
+
+    public ${class} get(int id) {
+        return ${object}MapperExt.selectByPrimaryKey(id);
+    }
+
+    public List<${class}> getList(int pageNum) {
+        ${class}Example activityExample = new ${class}Example();
+        ${class}Example.setOrderByClause("CREATE_TIME DESC "+ PageUtil.genPaginationClause(pageNum));
+        return ${object}MapperExt.selectByExample(activityExample);
+    }
+
+    public int totalPage() {
+        return PageUtil.getPageNum(${object}Mapper.countByExample(null));
+    }
+
+}
